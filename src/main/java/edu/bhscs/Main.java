@@ -15,7 +15,7 @@ package edu.bhscs;
 public class Main {
   public static void main(String[] args) {
     System.out.println("Doing the commit 2 times thingy");
-    System.out.println("First commit");
+    System.out.println("Second commit");
     System.out.println("---");
     System.out.println("Program Start");
     System.out.println("");
