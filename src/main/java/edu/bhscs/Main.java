@@ -13,15 +13,38 @@
 package edu.bhscs;
 
 public class Main {
+  // this is an example of a 'char' constant
+  // because it is global, it should be in capital letters
+  public static final char A = 'a';
+
   public static void main(String[] args) {
-    System.out.println("Doing the commit 2 times thingy");
-    System.out.println("Second commit");
-    System.out.println("---");
-    System.out.println("Program Start");
-    System.out.println("");
-    System.out.println("Hello World");
-    System.out.println("");
-    System.out.println("Program End");
-    System.out.println("---");
+    int someNumber = 67;
+
+    // for-loop control structure! :o
+    for (int i = 0; i < 2; i++) {
+      System.out.println("Run " + (i + 1) + ":");
+      // call to a method that prints the lines
+      replacementIsTheGatewayToAbstractions(someNumber);
+      System.out.println(); // blank line between the runs
+    }
+  }
+
+  // method that contains the lines to be printed
+  public static void replacementIsTheGatewayToAbstractions(int someNumber) {
+    System.out.println("67!" + A + someNumber);
+    System.out.print(A + "?" + A + someNumber);
+    System.out.print(A + A + someNumber);
+    System.out.println();
+
+    // if/else control structure! :)
+    if (someNumber > 50) {
+      System.out.println("this is neet");
+    } else {
+      System.out.println("this is not neet");
+    }
+
+    System.out.println();
+    System.out.println();
+    System.out.println("OK I am done");
   }
 }
