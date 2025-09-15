@@ -25,7 +25,7 @@ public class Main {
       System.out.println("Run " + (i + 1) + ":");
       // call to a method that prints the lines
       replacementIsTheGatewayToAbstractions(someNumber);
-      System.out.println(); // blank line between the runs
+      System.out.println("---"); // line between the runs
     }
   }
 
