@@ -12,6 +12,7 @@
 
 package edu.bhscs;
 
+/*
 public class Main {
   // this is an example of a 'char' constant
   // because it is global, it should be in capital letters
@@ -46,5 +47,33 @@ public class Main {
     System.out.println();
     System.out.println();
     System.out.println("OK I am done");
+  }
+}
+*/
+class Main {
+
+  public static final char A = 'a';
+  public static final float FLOAT = 214.1234f;
+
+  public static void main(String[] args) {
+
+    Awesome steve = new Awesome("steve");
+    Awesome sue = new Awesome("sue");
+    Awesome linda = new Awesome("linda");
+    Awesome john = new Awesome("john");
+    System.out.println(steve.getName());
+    System.out.println(sue.getName());
+    System.out.println(linda.getName());
+    System.out.println(john.getName());
+  }
+
+  public static int awesome() {
+
+    return 3;
+  }
+
+  public static String pushup(String food) {
+
+    return "Sweat " + food;
   }
 }

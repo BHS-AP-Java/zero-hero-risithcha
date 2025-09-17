@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "BoxShow",
+      "request": "launch",
+      "mainClass": "edu.bhscs.BoxShow",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
+      "name": "Box",
+      "request": "launch",
+      "mainClass": "edu.bhscs.Box",
+      "projectName": "ap-java-starter"
+    },
+    {
+      "type": "java",
       "name": "Run Main (console)",
       "request": "launch",
       "mainClass": "edu.bhscs.Main",
@@ -23,7 +37,10 @@
       "mainClass": "edu.bhscs.Main",
       "console": "integratedTerminal",
       "preLaunchTask": "xpra-up",
-      "env": { "DISPLAY": ":99", "LIBGL_ALWAYS_SOFTWARE": "1" }
+      "env": {
+        "DISPLAY": ":99",
+        "LIBGL_ALWAYS_SOFTWARE": "1"
+      }
     }
   ]
 }
