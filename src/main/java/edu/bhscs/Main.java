@@ -65,6 +65,12 @@ class Main {
     System.out.println(sue.getName());
     System.out.println(linda.getName());
     System.out.println(john.getName());
+
+    System.out.println(steve.getName());
+    steve.learnSomething("this is also awesome");
+    System.out.println(steve.getKnowledge());
+
+    System.out.println(john.getKnowledge());
   }
 
   public static int awesome() {
