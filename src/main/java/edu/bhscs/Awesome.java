@@ -1,6 +1,5 @@
 package edu.bhscs;
 
-
 public class Awesome {
   // fields / properties
   String name;
@@ -23,6 +22,4 @@ public class Awesome {
   String getKnowledge() {
     return this.knowledge;
   }
-
-
 }
