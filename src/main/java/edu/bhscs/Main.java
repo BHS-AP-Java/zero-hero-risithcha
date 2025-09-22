@@ -14,32 +14,32 @@ package edu.bhscs;
 
 class Main {
 
-  public static void main(String[] args) {
+    public static void main(String[] args) {
 
-    Cake chocoCake = new Cake("chocolate", "flour", "eggs", "sugar");
-    System.out.println("Cake flavor: " + chocoCake.getFlavor());
-    chocoCake.addSweetness("extra sweet");
-    System.out.println("Sweetness level: " + chocoCake.getSweetness());
-    System.out.println("All ingredients: " + chocoCake.getAllIngredients());
+        Cake chocoCake = new Cake("chocolate", "flour", "eggs", "sugar");
+        System.out.println("Cake flavor: " + chocoCake.getFlavor());
+        chocoCake.addSweetness("extra sweet");
+        System.out.println("Sweetness level: " + chocoCake.getSweetness());
+        System.out.println("All ingredients: " + chocoCake.getAllIngredients());
 
-    System.out.println("--- Time to eat! ---");
-    System.out.println(chocoCake.getCakeStatus());
+        System.out.println("--- Time to eat! ---");
+        System.out.println(chocoCake.getCakeStatus());
 
-    // Take a few bites
-    chocoCake.eat();
-    chocoCake.eat();
-    System.out.println("Bites left: " + chocoCake.getBitesLeft());
+        // Take a few bites
+        chocoCake.eat();
+        chocoCake.eat();
+        System.out.println("Bites left: " + chocoCake.getBitesLeft());
 
-    // Eat multiple bites at once
-    chocoCake.eatBites(3);
-    System.out.println(chocoCake.getCakeStatus());
+        // Eat multiple bites at once
+        chocoCake.eatBites(3);
+        System.out.println(chocoCake.getCakeStatus());
 
-    // Finish the cake
-    while (!chocoCake.isFinished()) {
-      chocoCake.eat();
+        // Finish the cake
+        while (!chocoCake.isFinished()) {
+            chocoCake.eat();
+        }
+
+        // Try to eat more (should say no more left)
+        chocoCake.eat();
     }
-
-    // Try to eat more (should say no more left)
-    chocoCake.eat();
-  }
 }
