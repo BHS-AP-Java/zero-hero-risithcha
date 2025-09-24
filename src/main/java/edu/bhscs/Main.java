@@ -4,10 +4,10 @@
 // 09/19/2025
 
 /*
- * DESCRIPTION: Creates and uses a Cake object
+ * DESCRIPTION: Person goes to store, buys cake, and eats it
  * INPUT: None
- * OUTPUT: Cake details printed to console
- * EDGE CASE: None
+ * OUTPUT: Store transaction and cake eating
+ * EDGE CASE: Not enough money to buy cake
  */
 
 package edu.bhscs;
@@ -16,30 +16,44 @@ class Main {
 
     public static void main(String[] args) {
 
-        Cake chocoCake = new Cake("chocolate", "flour", "eggs", "sugar");
-        System.out.println("Cake flavor: " + chocoCake.getFlavor());
-        chocoCake.addSweetness("extra sweet");
-        System.out.println("Sweetness level: " + chocoCake.getSweetness());
-        System.out.println("All ingredients: " + chocoCake.getAllIngredients());
+        // Create a store and a person
+        Store bakery = new Store("Cake Bake", 15.50);
+        Person risith = new Person("Risith", 20.00);
 
-        System.out.println("--- Time to eat! ---");
-        System.out.println(chocoCake.getCakeStatus());
+        // Create cakes
+        Cake chocolateCake = new Cake("chocolate", "flour", "eggs", "sugar");
+        Cake vanillaCake = new Cake("vanilla", "flour", "eggs", "sugar");
+        System.out.println();
+        System.out.println("    GOING TO THE STORE    ");
+        System.out.println();
+        bakery.welcomeCustomer(risith);
 
-        // Take a few bites
-        chocoCake.eat();
-        chocoCake.eat();
-        System.out.println("Bites left: " + chocoCake.getBitesLeft());
+        System.out.println();
+        System.out.println("    BUYING A CAKE    ");
+        System.out.println();
+        risith.buyCake(bakery, chocolateCake, 15.50);
 
-        // Eat multiple bites at once
-        chocoCake.eatBites(3);
-        System.out.println(chocoCake.getCakeStatus());
+        System.out.println();
+        System.out.println("    EATING THE CAKE    ");
+        System.out.println();
+        if (risith.hasCake()) {
+            // Take a few bites
+            risith.eatMyCake();
+            risith.eatMyCake();
 
-        // Finish the cake
-        while (!chocoCake.isFinished()) {
-            chocoCake.eat();
+            // Finish the whole cake
+            System.out.println("Time to finish this delicious cake!");
+            risith.finishCake();
+
+            // Try to eat more
+            risith.eatMyCake();
         }
 
-        // Try to eat more (should say no more left)
-        chocoCake.eat();
+        System.out.println();
+        System.out.println("    TRYING TO BUY ANOTHER CAKE (NOT ENOUGH MONEY)    ");
+        System.out.println();
+        Person poorCustomer = new Person("Bob", 10.00);
+        bakery.welcomeCustomer(poorCustomer);
+        poorCustomer.buyCake(bakery, vanillaCake, 15.50);
     }
 }

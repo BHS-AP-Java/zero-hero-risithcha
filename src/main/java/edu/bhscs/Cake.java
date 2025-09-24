@@ -12,7 +12,7 @@ public class Cake {
 
     // Need to construct delicious
     public Cake(String flavor, String ingredient1, String ingredient2, String ingredient3) {
-        System.out.println("baking a delicious " + flavor + " cake with... " + ingredient1 + ", " + ingredient2 + ", " + ingredient3);
+        System.out.println("baking a delicious " + flavor + " cake with " + ingredient1 + ", " + ingredient2 + ", " + ingredient3);
         this.flavor = flavor;
         this.ingredient1 = ingredient1;
         this.ingredient2 = ingredient2;
@@ -41,9 +41,9 @@ public class Cake {
     void eat() {
         if (bitesEaten < totalBites) {
             bitesEaten++;
-            System.out.println("Taking a bite of " + flavor + " cake! Delicious!");
+            System.out.println("Taking a bite of " + flavor + " cake! Amazing!");
             if (bitesEaten == totalBites) {
-                System.out.println("Cake is all gone! That was amazing!");
+                System.out.println("Cake is all gone! Fatty!");
             }
         } else {
             System.out.println("No more cake left to eat!");
