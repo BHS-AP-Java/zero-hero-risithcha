@@ -1,3 +1,15 @@
+// Risith Kankanamge
+// P2
+// Zero-Hero
+// 10/01/2025
+
+/*
+ * DESCRIPTION: Delicious cake that can be baked, customized, and eaten bite by bite
+ * INPUT: Flavor and ingredients
+ * OUTPUT: Cake creation and eating messages
+ * EDGE CASE: Trying to eat cake that's already finished
+ */
+
 package edu.bhscs;
 
 public class Cake {
@@ -67,5 +79,30 @@ public class Cake {
 
     String getCakeStatus() {
         return "Cake status: " + bitesEaten + "/" + totalBites + " bites eaten";
+    }
+
+    // Method to show how cake changes over time
+    void showCakeEvolution() {
+        System.out.println("=== CAKE EVOLUTION STATUS ===");
+        System.out.println("Flavor: " + flavor);
+        System.out.println("Ingredients: " + getAllIngredients());
+        if (sweetness != null) {
+            System.out.println("Sweetness level: " + sweetness);
+        }
+        System.out.println("Bites eaten: " + bitesEaten + "/" + totalBites);
+
+        // Show different states of the cake
+        if (bitesEaten == 0) {
+            System.out.println("State: Fresh and untouched");
+        } else if (bitesEaten < totalBites / 3) {
+            System.out.println("State: Lightly sampled");
+        } else if (bitesEaten < (2 * totalBites) / 3) {
+            System.out.println("State: Half-eaten");
+        } else if (bitesEaten < totalBites) {
+            System.out.println("State: Nearly finished");
+        } else {
+            System.out.println("State: Completely consumed");
+        }
+        System.out.println("============================");
     }
 }

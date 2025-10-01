@@ -1,3 +1,15 @@
+// Risith Kankanamge
+// P2
+// Zero-Hero
+// 10/01/2025
+
+/*
+ * DESCRIPTION: Basic person who has money and can buy/eat cakes
+ * INPUT: Name and money amount
+ * OUTPUT: Person buying and eating cakes
+ * EDGE CASE: Person tries to eat cake they don't have
+ */
+
 package edu.bhscs;
 
 public class Person {
