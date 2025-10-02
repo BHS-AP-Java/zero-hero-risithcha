@@ -28,7 +28,7 @@ public class Baker {
         System.out.println("Baker " + name + " is ready to start baking (Skill Level: " + skillLevel + ")");
     }
 
-    //Methods
+    // Methods
 
     // Get the baker's name
     String getName() {
@@ -82,7 +82,7 @@ public class Baker {
 
         System.out.println("Baker " + name + " is creating a premium " + flavor + " cake with special ingredients!");
         Cake premiumCake = new Cake(flavor, "organic flour", "farm-fresh eggs", "pure cane sugar");
-        premiumCake.addSweetness("exquisitely crafted");
+        premiumCake.addSweetness("perfectly crafted");
 
         // Premium cakes count toward experience
         cakesMade++;

@@ -50,7 +50,7 @@ public class Customer {
         return this.satisfactionLevel;
     }
 
-    // Purchase a cake from a store - demonstrates customer behavior
+    // Purchase a cake from a store
     void purchaseCake(Store store, Cake cake, double price) {
         System.out.println("Customer " + name + " is considering buying a " + cake.getFlavor() + " cake...");
 

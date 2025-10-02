@@ -22,7 +22,7 @@ public class Cake {
     int totalBites;
     int bitesEaten;
 
-    // Need to construct delicious
+    // Constructor
     public Cake(String flavor, String ingredient1, String ingredient2, String ingredient3) {
         System.out.println("baking a delicious " + flavor + " cake with " + ingredient1 + ", " + ingredient2 + ", " + ingredient3);
         this.flavor = flavor;
@@ -33,6 +33,7 @@ public class Cake {
         this.bitesEaten = 0;
     }
 
+    // Methods
     String getFlavor() {
         return this.flavor;
     }
