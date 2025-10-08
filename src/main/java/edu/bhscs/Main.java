@@ -1,23 +1,36 @@
 // Risith Kankanamge
 // P2
-// Zero-Hero
-// 10/01/2025
+// Zero-Hero - Part 2 & 3
+// 10/07/2025
 
 /*
- * DESCRIPTION: Interactive bakery where you can be baker, customer, or run PTSA
- * INPUT: User picking what they wanna do and making choices
- * OUTPUT: Cool bakery simulation that changes based on what you do
- * EDGE CASE: People typing wrong stuff and different role interactions
+ * GOAL: Interactive bakery simulation where users can play as baker, customer, or manage PTSA
+ *       Demonstrates ENCAPSULATION through Player class wrapping Scanner
+ *       Shows how objects change over time (Cake eaten, Customer satisfaction, Baker skill)
+ *
+ * INPUT: User choices through menus, names, numbers, yes/no answers
+ *        All input handled through Player/User class (ABSTRACTION)
+ *
+ * OUTPUT: Menu displays, transaction messages, status updates, cake baking results
+ *         Simulation of bakery economy with changing states
+ *
+ * EDGE CASES:
+ *   - Invalid menu choices (non-numeric input, out of range numbers)
+ *   - Customer trying to buy cake without enough money
+ *   - Baker attempting to make premium cake without special ingredients
+ *   - Trying to eat cake that's already finished
+ *   - Empty cake inventory when customer wants to purchase
+ *   - PTSA trying to spend more funds than available
+ *   - User entering negative prices or amounts (handled by validation)
  */
 
 package edu.bhscs;
 
-import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Main {
     // fields / properties
-    private static Scanner scanner = new Scanner(System.in);
+    private static Player player;
     private static Store mainStore;
     private static PTSA schoolPTSA;
     private static Baker currentBaker;
@@ -25,6 +38,9 @@ public class Main {
     private static ArrayList<Cake> availableCakes = new ArrayList<>();
 
     public static void main(String[] args) {
+        // Constructor
+        player = new Player();
+
         System.out.println("Welcome to the economy");
         System.out.println();
 
@@ -35,7 +51,7 @@ public class Main {
         boolean playing = true;
         while (playing) {
             displayMainMenu();
-            int choice = getIntInput("Enter your choice: ");
+            int choice = player.getInt("Enter your choice: ");
 
             switch (choice) {
                 case 1:
@@ -58,14 +74,13 @@ public class Main {
                     System.out.println("Invalid choice! Please try again.");
             }
         }
-        scanner.close();
+        player.close();
     }
 
     private static void initializeEconomy() {
         System.out.println("");
         System.out.println("Let's set up your bakery!");
-        System.out.print("Enter your bakery name: ");
-        String bakeryName = scanner.nextLine();
+        String bakeryName = player.getString("Enter your bakery name: ");
 
         mainStore = new Store(bakeryName, 15.50);
         schoolPTSA = new PTSA("Lockwood Elementary PTSA", 500.0);
@@ -87,36 +102,32 @@ public class Main {
 
     private static void playAsBaker() {
         if (currentBaker == null) {
-            System.out.print("Enter baker name: ");
-            String bakerName = scanner.nextLine();
-            currentBaker = new Baker(bakerName);
+            currentBaker = new Baker(player);
         }
 
         boolean bakerMode = true;
         while (bakerMode) {
             System.out.println();
             System.out.println("=== BAKER MENU ===");
-            System.out.println("1. Bake a regular cake");
-            System.out.println("2. Get special ingredients");
-            System.out.println("3. Make premium cake");
-            System.out.println("4. View baker status");
-            System.out.println("5. Return to main menu");
+            System.out.println("1. Take an order from a customer");
+            System.out.println("2. Bake a cake");
+            System.out.println("3. Apply for job at store");
+            System.out.println("4. Return to main menu");
 
-            int choice = getIntInput("Enter your choice: ");
+            int choice = player.getInt("Enter your choice: ");
             switch (choice) {
                 case 1:
-                    bakeCakeInteractive();
+                    takeOrderInteractive();
                     break;
                 case 2:
-                    currentBaker.getSpecialIngredients();
+                    Cake newCake = currentBaker.bakeCake();
+                    availableCakes.add(newCake);
+                    System.out.println("Cake added to inventory!");
                     break;
                 case 3:
-                    makePremiumCakeInteractive();
+                    currentBaker.takeJob(mainStore);
                     break;
                 case 4:
-                    currentBaker.showBakerStatus();
-                    break;
-                case 5:
                     bakerMode = false;
                     break;
                 default:
@@ -125,42 +136,20 @@ public class Main {
         }
     }
 
-    private static void bakeCakeInteractive() {
-        System.out.print("Enter cake flavor: ");
-        String flavor = scanner.nextLine();
-        System.out.print("Enter first ingredient: ");
-        String ing1 = scanner.nextLine();
-        System.out.print("Enter second ingredient: ");
-        String ing2 = scanner.nextLine();
-        System.out.print("Enter third ingredient: ");
-        String ing3 = scanner.nextLine();
-
-        Cake newCake = currentBaker.makeCake(flavor, ing1, ing2, ing3);
-        availableCakes.add(newCake);
-        System.out.println("Cake added to inventory!");
-    }
-
-    private static void makePremiumCakeInteractive() {
-        if (!currentBaker.hasSpecialIngredients) {
-            System.out.println("You need special ingredients first! Get them from the baker menu.");
+    private static void takeOrderInteractive() {
+        if (currentCustomer == null) {
+            System.out.println("No customer available! Please create a customer first.");
             return;
         }
-
-        System.out.print("Enter premium cake flavor: ");
-        String flavor = scanner.nextLine();
-
-        Cake premiumCake = currentBaker.makePremiumCake(flavor);
-        availableCakes.add(premiumCake);
-        System.out.println("Premium cake created and added to inventory!");
+        int price = player.getInt("Enter the price for the cake: $");
+        currentBaker.takeOrder(price, currentCustomer);
     }
 
     private static void playAsCustomer() {
         if (currentCustomer == null) {
-            System.out.print("Enter customer name: ");
-            String customerName = scanner.nextLine();
-            double budget = getDoubleInput("Enter your budget: $");
-            System.out.print("Enter your favorite cake flavor: ");
-            String favoriteFlavor = scanner.nextLine();
+            String customerName = player.getString("Enter customer name: ");
+            double budget = player.getDouble("Enter your budget: $");
+            String favoriteFlavor = player.getString("Enter your favorite cake flavor: ");
             currentCustomer = new Customer(customerName, budget, favoriteFlavor);
         }
 
@@ -175,7 +164,7 @@ public class Main {
             System.out.println("5. View customer status");
             System.out.println("6. Return to main menu");
 
-            int choice = getIntInput("Enter your choice: ");
+            int choice = player.getInt("Enter your choice: ");
             switch (choice) {
                 case 1:
                     mainStore.welcomeCustomer(currentCustomer);
@@ -213,7 +202,7 @@ public class Main {
             System.out.println((i + 1) + ". " + cake.getFlavor() + " cake");
         }
 
-        int cakeChoice = getIntInput("Pick a cake number: ") - 1;
+        int cakeChoice = player.getInt("Pick a cake number: ") - 1;
         if (cakeChoice >= 0 && cakeChoice < availableCakes.size()) {
             Cake selectedCake = availableCakes.get(cakeChoice);
             double price = 15.50; // Use store's default cake price
@@ -242,23 +231,20 @@ public class Main {
             System.out.println("4. View PTSA status");
             System.out.println("5. Return to main menu");
 
-            int choice = getIntInput("Enter your choice: ");
+            int choice = player.getInt("Enter your choice: ");
             switch (choice) {
                 case 1:
-                    double amount = getDoubleInput("Enter donation amount: $");
-                    System.out.print("Enter donation source: ");
-                    String source = scanner.nextLine();
+                    double amount = player.getDouble("Enter donation amount: $");
+                    String source = player.getString("Enter donation source: ");
                     schoolPTSA.receiveDonation(amount, source);
                     break;
                 case 2:
-                    System.out.print("Enter event name: ");
-                    String eventName = scanner.nextLine();
+                    String eventName = player.getString("Enter event name: ");
                     schoolPTSA.organizeEvent(eventName);
                     break;
                 case 3:
-                    double allocAmount = getDoubleInput("Enter amount to allocate: $");
-                    System.out.print("Enter purpose: ");
-                    String purpose = scanner.nextLine();
+                    double allocAmount = player.getDouble("Enter amount to allocate: $");
+                    String purpose = player.getString("Enter purpose: ");
                     schoolPTSA.allocateFunds(allocAmount, purpose);
                     break;
                 case 4:
@@ -279,13 +265,17 @@ public class Main {
         System.out.println();
         System.out.println("Cakes available: " + availableCakes.size());
         for (Cake cake : availableCakes) {
-            cake.getCakeStatus();
+            System.out.println(" - " + cake.getCakeStatus());
         }
 
         if (currentBaker != null) {
             System.out.println();
             System.out.println("--- Baker Info ---");
-            currentBaker.showBakerStatus();
+            System.out.println("Name: " + currentBaker.name);
+            System.out.println("Cash: $" + currentBaker.cash);
+            if (currentBaker.placeOfWork != null) {
+                System.out.println("Works at: " + currentBaker.placeOfWork.getName());
+            }
         }
 
         if (currentCustomer != null) {
@@ -297,28 +287,5 @@ public class Main {
         System.out.println();
         System.out.println("--- PTSA Info ---");
         schoolPTSA.showPTSAStatus();
-    }
-
-    // Helper methods to make sure everything works smoothly
-    private static int getIntInput(String prompt) {
-        System.out.print(prompt);
-        while (!scanner.hasNextInt()) {
-            System.out.print("Please enter a valid number: ");
-            scanner.next();
-        }
-        int result = scanner.nextInt();
-        scanner.nextLine();
-        return result;
-    }
-
-    private static double getDoubleInput(String prompt) {
-        System.out.print(prompt);
-        while (!scanner.hasNextDouble()) {
-            System.out.print("Please enter a valid number: ");
-            scanner.next();
-        }
-        double result = scanner.nextDouble();
-        scanner.nextLine();
-        return result;
     }
 }

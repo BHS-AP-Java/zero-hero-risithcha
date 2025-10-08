@@ -33,6 +33,17 @@ public class Cake {
         this.bitesEaten = 0;
     }
 
+    // Constructor that takes flavor and Flour
+    public Cake(String flavor, Flour flour) {
+        System.out.println("baking a " + flavor + " cake with " + flour.getType() + " flour");
+        this.flavor = flavor;
+        this.ingredient1 = flour.getType() + " flour";
+        this.ingredient2 = "eggs";
+        this.ingredient3 = "sugar";
+        this.totalBites = 10;
+        this.bitesEaten = 0;
+    }
+
     // Methods
     String getFlavor() {
         return this.flavor;

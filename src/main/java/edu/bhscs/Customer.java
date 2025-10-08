@@ -140,4 +140,23 @@ public class Customer {
         System.out.println("Favorite Flavor: " + favoredFlavor);
         System.out.println("=====================");
     }
+
+    // Pay for a cake and return the amount paid
+    int pay(int price) {
+        if (this.money >= price) {
+            this.money -= price;
+            System.out.println(this.name + " pays $" + price);
+            return price;
+        } else {
+            System.out.println(this.name + " doesn't have enough money!");
+            return 0;
+        }
+    }
+
+    // Receive a cake
+    void takeCake(Cake cake) {
+        this.ownedCake = cake;
+        this.cakesPurchased++;
+        System.out.println(this.name + " receives a " + cake.getFlavor() + " cake!");
+    }
 }

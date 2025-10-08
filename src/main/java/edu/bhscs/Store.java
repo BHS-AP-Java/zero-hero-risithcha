@@ -26,6 +26,11 @@ public class Store {
 
     // Methods
 
+    // Get store name
+    String getName() {
+        return this.storeName;
+    }
+
     // Sell a cake to a customer
     boolean sellCake(Person customer, double price) {
         System.out.println(customer.getName() + " wants to buy a cake for $" + price);

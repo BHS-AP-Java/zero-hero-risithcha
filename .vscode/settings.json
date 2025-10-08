@@ -1,17 +1,24 @@
 {
-  // Trim cruft
+  // Force 4 spaces for indentation in the workspace and disable automatic detection
+  "editor.tabSize": 4,
+  "editor.insertSpaces": true,
+  // When true VS Code will try to detect indentation from file contents; this can override tabSize.
+  // We disable it so the workspace setting is always used when opening files.
+  "editor.detectIndentation": false,
+
+  // Misc useful editor settings
   "files.trimTrailingWhitespace": true,
   "editor.formatOnPaste": true,
 
-  // Java: 2-space, spaces not tabs, and format-on-save
+  // Per-language overrides (Java files in this repo) - enforce 4 spaces here too
   "[java]": {
     "editor.defaultFormatter": "redhat.java",
     "editor.formatOnSave": false,
-    "editor.tabSize": 2,
+    "editor.tabSize": 4,
     "editor.insertSpaces": true
   },
 
-  // Google Java Style for the Red Hat formatter
+  // Google Java Style for the Red Hat formatter (kept from original workspace)
   "java.format.settings.url": "${workspaceFolder}/.vscode/eclipse-java-google-style.xml",
   "java.format.settings.profile": "GoogleStyle"
 }
