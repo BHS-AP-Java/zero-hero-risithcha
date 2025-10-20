@@ -30,7 +30,8 @@ public class Customer {
         this.cakesPurchased = 0;
         this.isLoyalCustomer = false;
         this.favoredFlavor = favoredFlavor;
-        System.out.println("Customer " + name + " arrives with $" + money + " and loves " + favoredFlavor + " cakes!");
+        System.out.println(
+            "Customer " + name + " arrives with $" + money + " and loves " + favoredFlavor + " cakes!");
     }
 
     // Methods
@@ -52,26 +53,20 @@ public class Customer {
 
     // Purchase a cake from a store
     void purchaseCake(Store store, Cake cake, double price) {
-        System.out.println("Customer " + name + " is considering buying a " + cake.getFlavor() + " cake...");
-
         boolean purchaseSuccessful = store.sellCake(this, price);
         if (purchaseSuccessful) {
             this.ownedCake = cake;
             this.cakesPurchased++;
 
-            // Check if this matches their favored flavor
-            if (cake.getFlavor().equals(favoredFlavor)) {
-                satisfactionLevel += 2;
-                System.out.println("Customer " + name + " is extra happy! It's their favorite " + favoredFlavor + " cake!");
-            } else {
-                satisfactionLevel += 1;
-                System.out.println("Customer " + name + " is pleased with their purchase!");
-            }
-
             // Become loyal customer after multiple purchases
             if (cakesPurchased >= 3 && !isLoyalCustomer) {
                 isLoyalCustomer = true;
-                System.out.println("Customer " + name + " has become a loyal customer after " + cakesPurchased + " purchases!");
+                System.out.println(
+                    "Customer "
+                        + name
+                        + " has become a loyal customer after "
+                        + cakesPurchased
+                        + " purchases!");
             }
 
         } else {
@@ -83,17 +78,8 @@ public class Customer {
 
     // Enjoy the purchased cake
     void enjoyCake() {
-        if (ownedCake != null && !ownedCake.isFinished()) {
+        if (ownedCake != null) {
             System.out.println("Customer " + name + " is enjoying their delicious cake!");
-            ownedCake.eat();
-
-            // Eating cake increases satisfaction
-            if (satisfactionLevel < 10) {
-                satisfactionLevel++;
-                System.out.println("Customer " + name + " feels happier! (Satisfaction: " + satisfactionLevel + "/10)");
-            }
-        } else if (ownedCake != null && ownedCake.isFinished()) {
-            System.out.println("Customer " + name + " has finished their cake and wants more!");
         } else {
             System.out.println("Customer " + name + " has no cake to enjoy!");
         }
@@ -101,14 +87,8 @@ public class Customer {
 
     // Finish entire cake quickly
     void devourCake() {
-        if (ownedCake != null && !ownedCake.isFinished()) {
+        if (ownedCake != null) {
             System.out.println("Customer " + name + " eats the entire cake");
-            while (!ownedCake.isFinished()) {
-                ownedCake.eat();
-            }
-            // Big satisfaction boost for finishing a whole cake
-            satisfactionLevel = Math.min(10, satisfactionLevel + 2);
-            System.out.println("Customer " + name + " is very satisfied! (Satisfaction: " + satisfactionLevel + "/10)");
         } else {
             System.out.println("Customer " + name + " has no cake to devour!");
         }
@@ -116,14 +96,15 @@ public class Customer {
 
     // Check if customer has a cake
     boolean hasCake() {
-        return ownedCake != null && !ownedCake.isFinished();
+        return ownedCake != null;
     }
 
     // Get loyalty discount if possible
     double getLoyaltyDiscount(double originalPrice) {
         if (isLoyalCustomer) {
             double discount = originalPrice * 0.1; // 10% discount for loyal customers
-            System.out.println("Loyal customer " + name + " gets a $" + String.format("%.2f", discount) + " discount!");
+            System.out.println(
+                "Loyal customer " + name + " gets a $" + String.format("%.2f", discount) + " discount!");
             return originalPrice - discount;
         }
         return originalPrice;
@@ -157,6 +138,5 @@ public class Customer {
     void takeCake(Cake cake) {
         this.ownedCake = cake;
         this.cakesPurchased++;
-        System.out.println(this.name + " receives a " + cake.getFlavor() + " cake!");
     }
 }

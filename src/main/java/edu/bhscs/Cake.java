@@ -15,106 +15,141 @@ package edu.bhscs;
 public class Cake {
     // fields / properties
     String flavor;
-    String ingredient1;
-    String ingredient2;
-    String ingredient3;
-    String sweetness;
+    String frosting;
     int totalBites;
     int bitesEaten;
+    int height;
+    int width;
+    int layers;
 
     // Constructor
-    public Cake(String flavor, String ingredient1, String ingredient2, String ingredient3) {
-        System.out.println("baking a delicious " + flavor + " cake with " + ingredient1 + ", " + ingredient2 + ", " + ingredient3);
+    public Cake(String flavor, String frosting, int height, int width, int layers) {
+        System.out.println("baking a " + flavor + " cake with " + frosting + " frosting");
         this.flavor = flavor;
-        this.ingredient1 = ingredient1;
-        this.ingredient2 = ingredient2;
-        this.ingredient3 = ingredient3;
-        this.totalBites = 10; // Cake has 10 bites
+        this.frosting = frosting;
+        this.height = height;
+        this.width = width;
+        this.layers = layers;
+        this.totalBites = height * layers;
         this.bitesEaten = 0;
     }
 
-    // Constructor that takes flavor and Flour
-    public Cake(String flavor, Flour flour) {
-        System.out.println("baking a " + flavor + " cake with " + flour.getType() + " flour");
-        this.flavor = flavor;
-        this.ingredient1 = flour.getType() + " flour";
-        this.ingredient2 = "eggs";
-        this.ingredient3 = "sugar";
-        this.totalBites = 10;
-        this.bitesEaten = 0;
-    }
+    void draw() {
+        String title = "baking a " + flavor + " cake with " + frosting + " frosting";
+        int artWidth = Math.max(width + 6, title.length());
 
-    // Methods
-    String getFlavor() {
-        return this.flavor;
-    }
+        // Print title
+        System.out.println(title);
 
-    void addSweetness(String sweetness) {
-        this.sweetness = sweetness;
-    }
+        // Candles and flames across the cake top
+        String candlesLine = "";
+        String flamesLine = "";
+        for (int i = 0; i < artWidth - 4; i++) {
+            candlesLine += 'i';
+            flamesLine += '^';
+        }
+        System.out.println(candlesLine);
+        System.out.println(flamesLine);
 
-    String getSweetness() {
-        return this.sweetness;
-    }
+        // Frosting top (underscores)
+        String top = "  ";
+        for (int i = 0; i < artWidth - 4; i++) top += '_';
+        System.out.println(top);
 
-    String getAllIngredients() {
-        return this.ingredient1 + ", " + this.ingredient2 + ", " + this.ingredient3;
-    }
+        // Frosting wavy line
+        String wave = "/";
+        for (int i = 0; i < artWidth - 3; i++) {
+            wave += (i % 2 == 0) ? '~' : ' ';
+        }
+        wave += '\\';
+        System.out.println(wave);
 
-    // Eating methods
-    void eat() {
-        if (bitesEaten < totalBites) {
-            bitesEaten++;
-            System.out.println("Taking a bite of " + flavor + " cake! Amazing!");
-            if (bitesEaten == totalBites) {
-                System.out.println("Cake is all gone! Fatty!");
+        // Layers
+        for (int layer = 0; layer < layers; layer++) {
+            String line = "|";
+            for (int i = 0; i < artWidth - 2; i++) {
+                line += (i % 3 == 0) ? '=' : '-';
             }
-        } else {
-            System.out.println("No more cake left to eat!");
+            line += "|";
+            System.out.println(line);
         }
-    }
 
-    void eatBites(int bites) {
-        for (int i = 0; i < bites; i++) {
-            eat();
-            if (bitesEaten == totalBites) break;
+        // Cake body (height)
+        for (int h = 0; h < height; h++) {
+            String body = "|";
+            for (int i = 0; i < artWidth - 2; i++) body += ' ';
+            body += "|";
+            System.out.println(body);
         }
+
+        // Base
+        String base = " ";
+        for (int i = 0; i < artWidth - 2; i++) base += '-';
+        System.out.println(base);
+
+        // Info
+        System.out.println();
+        System.out.println("Flavor: " + flavor + " | Frosting: " + frosting + " | Layers: " + layers);
+        System.out.println("Bites left: " + (totalBites - bitesEaten) + "/" + totalBites);
     }
 
-    int getBitesLeft() {
-        return totalBites - bitesEaten;
-    }
+    void draw(String name, String age) {
+        String title = "Happy Birthday, " + name + "!";
+        int artWidth = Math.max(width + 6, title.length());
 
-    boolean isFinished() {
-        return bitesEaten >= totalBites;
-    }
+        // Print title
+        System.out.println(title);
 
-    String getCakeStatus() {
-        return "Cake status: " + bitesEaten + "/" + totalBites + " bites eaten";
-    }
-
-    // Method to show how cake changes over time
-    void showCakeEvolution() {
-        System.out.println("=== CAKE EVOLUTION STATUS ===");
-        System.out.println("Flavor: " + flavor);
-        System.out.println("Ingredients: " + getAllIngredients());
-        if (sweetness != null) {
-            System.out.println("Sweetness level: " + sweetness);
+        // Candles and flames across the cake top
+        String candlesLine = "";
+        String flamesLine = "";
+        for (int i = 0; i < artWidth - 4; i++) {
+            candlesLine += 'i';
+            flamesLine += '^';
         }
-        System.out.println("Bites eaten: " + bitesEaten + "/" + totalBites);
+        System.out.println(candlesLine);
+        System.out.println(flamesLine);
 
-        // Show different states of the cake
-        if (bitesEaten == 0) {
-            System.out.println("State: Fresh and untouched");
-        } else if (bitesEaten < totalBites / 3) {
-            System.out.println("State: Lightly sampled");
-        } else if (bitesEaten < (2 * totalBites) / 3) {
-            System.out.println("State: Half-eaten");
-        } else if (bitesEaten < totalBites) {
-            System.out.println("State: Nearly finished");
-        } else {
-            System.out.println("State: Completely consumed");
+        // Frosting top (underscores)
+        String top = "  ";
+        for (int i = 0; i < artWidth - 4; i++) top += '_';
+        System.out.println(top);
+
+        // Frosting wavy line
+        String wave = "/";
+        for (int i = 0; i < artWidth - 3; i++) {
+            wave += (i % 2 == 0) ? '~' : ' ';
         }
-        System.out.println("============================");
+        wave += '\\';
+        System.out.println(wave);
+
+        // Layers
+        for (int layer = 0; layer < layers; layer++) {
+            String line = "|";
+            for (int i = 0; i < artWidth - 2; i++) {
+                line += (i % 3 == 0) ? '=' : '-';
+            }
+            line += "|";
+            System.out.println(line);
+        }
+
+        // Cake body (height)
+        for (int h = 0; h < height; h++) {
+            String body = "|";
+            for (int i = 0; i < artWidth - 2; i++) body += ' ';
+            body += "|";
+            System.out.println(body);
+        }
+
+        // Base
+        String base = " ";
+        for (int i = 0; i < artWidth - 2; i++) base += '-';
+        System.out.println(base);
+
+        // Info
+        System.out.println();
+        System.out.println("Flavor: " + flavor + " | Frosting: " + frosting + " | Layers: " + layers);
+        System.out.println("Bites left: " + (totalBites - bitesEaten) + "/" + totalBites);
+        System.out.println("Age: " + age);
     }
 }

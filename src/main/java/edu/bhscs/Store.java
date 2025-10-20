@@ -38,11 +38,21 @@ public class Store {
         if (customer.getMoney() >= price) {
             // Customer has enough money
             customer.money -= price; // Deduct money
-            System.out.println("Transaction successful! " + customer.getName() + " now has $" + customer.getMoney() + " left.");
+            System.out.println(
+                    "Transaction successful! "
+                            + customer.getName()
+                            + " now has $"
+                            + customer.getMoney()
+                            + " left.");
             return true;
         } else {
             // Not enough money
-            System.out.println("Sorry " + customer.getName() + ", you need $" + (price - customer.getMoney()) + " more to buy this cake!");
+            System.out.println(
+                    "Sorry "
+                            + customer.getName()
+                            + ", you need $"
+                            + (price - customer.getMoney())
+                            + " more to buy this cake!");
             return false;
         }
     }
@@ -54,11 +64,21 @@ public class Store {
         if (customer.getMoney() >= price) {
             // Customer has enough money
             customer.money -= price; // Deduct money
-            System.out.println("Transaction successful! " + customer.getName() + " now has $" + customer.getMoney() + " left.");
+            System.out.println(
+                    "Transaction successful! "
+                            + customer.getName()
+                            + " now has $"
+                            + customer.getMoney()
+                            + " left.");
             return true;
         } else {
             // Not enough money
-            System.out.println("Sorry " + customer.getName() + ", you need $" + (price - customer.getMoney()) + " more to buy this cake!");
+            System.out.println(
+                    "Sorry "
+                            + customer.getName()
+                            + ", you need $"
+                            + (price - customer.getMoney())
+                            + " more to buy this cake!");
             return false;
         }
     }

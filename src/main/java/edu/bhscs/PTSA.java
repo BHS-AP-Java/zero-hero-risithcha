@@ -29,7 +29,12 @@ public class PTSA {
         this.eventsSupported = 0;
         this.goalReached = false;
         this.currentProject = "School Equipment Fund";
-        System.out.println(organizationName + " has started fundraising! Goal: $" + fundraisingGoal + " for the " + currentProject);
+        System.out.println(
+            organizationName
+                + " has started fundraising! Goal: $"
+                + fundraisingGoal
+                + " for the "
+                + currentProject);
     }
 
     // Methods
@@ -57,7 +62,16 @@ public class PTSA {
     // Receive money from cake sales
     void receiveDonation(double amount, String source) {
         totalFunds += amount;
-        System.out.println(organizationName + " receives $" + amount + " from " + source + "! Total funds: $" + totalFunds + " / $" + fundraisingGoal);
+        System.out.println(
+            organizationName
+                + " receives $"
+                + amount
+                + " from "
+                + source
+                + "! Total funds: $"
+                + totalFunds
+                + " / $"
+                + fundraisingGoal);
 
         // Check progress towards goal
         double progressPercentage = (totalFunds / fundraisingGoal) * 100;
@@ -70,7 +84,12 @@ public class PTSA {
         // Goal reached
         if (totalFunds >= fundraisingGoal && !goalReached) {
             goalReached = true;
-            System.out.println("CONGRATULATIONS! " + organizationName + " has reached their fundraising goal! The " + currentProject + " can now be funded!");
+            System.out.println(
+                "CONGRATULATIONS! "
+                    + organizationName
+                    + " has reached their fundraising goal! The "
+                    + currentProject
+                    + " can now be funded!");
             planNextProject();
         }
     }
@@ -92,7 +111,11 @@ public class PTSA {
         }
 
         goalReached = false; // Reset for new goal
-        System.out.println("New project planned: " + currentProject + ". New fundraising goal: $" + String.format("%.2f", fundraisingGoal));
+        System.out.println(
+            "New project planned: "
+                + currentProject
+                + ". New fundraising goal: $"
+                + String.format("%.2f", fundraisingGoal));
     }
 
     // Organize a special fundraising event
@@ -103,7 +126,13 @@ public class PTSA {
         double eventProceeds = 50.0 + (Math.random() * 100); // Random between $50-$150
         totalFunds += eventProceeds;
 
-        System.out.println("The " + eventName + " raised an additional $" + String.format("%.2f", eventProceeds) + "! Updated total funds: $" + String.format("%.2f", totalFunds));
+        System.out.println(
+            "The "
+                + eventName
+                + " raised an additional $"
+                + String.format("%.2f", eventProceeds)
+                + "! Updated total funds: $"
+                + String.format("%.2f", totalFunds));
 
         // Check if this pushes us over the goal
         if (totalFunds >= fundraisingGoal && !goalReached) {
@@ -117,20 +146,44 @@ public class PTSA {
     void allocateFunds(double amount, String purpose) {
         if (totalFunds >= amount) {
             totalFunds -= amount;
-            System.out.println(organizationName + " allocates $" + amount + " for " + purpose + ". Remaining funds: $" + String.format("%.2f", totalFunds));
+            System.out.println(
+                organizationName
+                    + " allocates $"
+                    + amount
+                    + " for "
+                    + purpose
+                    + ". Remaining funds: $"
+                    + String.format("%.2f", totalFunds));
         } else {
-            System.out.println("Insufficient funds! Need $" + (amount - totalFunds) + " more for " + purpose);
+            System.out.println(
+                "Insufficient funds! Need $" + (amount - totalFunds) + " more for " + purpose);
         }
     }
 
     // Display current PTSA status and progress
     void showPTSAStatus() {
-        System.out.println("=== PTSA STATUS ===\nOrganization: " + organizationName + "\nCurrent Project: " + currentProject + "\nTotal Funds Raised: $" + String.format("%.2f", totalFunds) + "\nFundraising Goal: $" + String.format("%.2f", fundraisingGoal) + "\nGoal Reached: " + goalReached + "\nEvents Supported: " + eventsSupported);
+        System.out.println(
+            "=== PTSA STATUS ===\nOrganization: "
+                + organizationName
+                + "\nCurrent Project: "
+                + currentProject
+                + "\nTotal Funds Raised: $"
+                + String.format("%.2f", totalFunds)
+                + "\nFundraising Goal: $"
+                + String.format("%.2f", fundraisingGoal)
+                + "\nGoal Reached: "
+                + goalReached
+                + "\nEvents Supported: "
+                + eventsSupported);
 
         if (!goalReached) {
             double remaining = fundraisingGoal - totalFunds;
             double percentage = (totalFunds / fundraisingGoal) * 100;
-            System.out.println("Progress: " + String.format("%.1f", percentage) + "% complete\nStill needed: $" + String.format("%.2f", remaining));
+            System.out.println(
+                "Progress: "
+                    + String.format("%.1f", percentage)
+                    + "% complete\nStill needed: $"
+                    + String.format("%.2f", remaining));
         }
         System.out.println("=================");
     }

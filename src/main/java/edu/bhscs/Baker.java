@@ -32,19 +32,20 @@ public class Baker {
     // METHODS
     void takeOrder(int price, Customer c) {
         cash += c.pay(price);
-        c.takeCake(bakeCake());
+        // c.takeCake(bakeCake());
     }
 
     Cake bakeCake() {
-        String answer = this.p.giveAnswer("what cake do you you want?");
-        return new Cake(answer, this.f);
+        // String answer = this.p.giveAnswer("what cake do you you want?");
+        // return new Cake(answer, this.f);
+        return null;
     }
 
     void takeJob(Store bakery) {
         String doYouWantToWorkHere = this.p.giveAnswer("Do you want to work at " + bakery.getName());
-        if(doYouWantToWorkHere.equals("y")){
+        if (doYouWantToWorkHere.equals("y")) {
             this.placeOfWork = bakery;
-            System.out.println(this.name + " now works at " + bakery.getName() );
+            System.out.println(this.name + " now works at " + bakery.getName());
         }
     }
 }
