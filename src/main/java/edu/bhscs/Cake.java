@@ -34,6 +34,11 @@ public class Cake {
         this.bitesEaten = 0;
     }
 
+    public Cake() {
+        this("Vanilla", "Chocolate", 3, 10, 1);
+    }
+
+    /*
     void draw() {
         String title = "baking a " + flavor + " cake with " + frosting + " frosting";
         int artWidth = Math.max(width + 6, title.length());
@@ -92,6 +97,7 @@ public class Cake {
         System.out.println("Flavor: " + flavor + " | Frosting: " + frosting + " | Layers: " + layers);
         System.out.println("Bites left: " + (totalBites - bitesEaten) + "/" + totalBites);
     }
+    */
 
     void draw(String name, String age) {
         String title = "Happy Birthday, " + name + "!";

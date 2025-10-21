@@ -23,6 +23,10 @@ public class Player {
         this.scanner = new Scanner(System.in);
     }
 
+    public Player(String name) {
+        this.scanner = new Scanner(System.in);
+    }
+
     // Methods
 
     // gets integer from user with error checking

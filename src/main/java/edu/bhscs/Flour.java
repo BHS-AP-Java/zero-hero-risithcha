@@ -13,35 +13,35 @@
 package edu.bhscs;
 
 public class Flour {
-    // fields / properties
-    private String type;
-    private int quality;
+  // fields / properties
+  private String type;
+  private int quality;
 
-    // Constructor
-    public Flour() {
-        this.type = "all-purpose";
-        this.quality = 5;
-    }
+  // Constructor
+  public Flour() {
+    this.type = "all-purpose";
+    this.quality = 5;
+  }
 
-    public Flour(String type, int quality) {
-        this.type = type;
-        this.quality = quality;
-    }
+  public Flour(String type, int quality) {
+    this.type = type;
+    this.quality = quality;
+  }
 
-    // Methods
-    public String getType() {
-        return this.type;
-    }
+  // Methods
+  public String getType() {
+    return this.type;
+  }
 
-    public int getQuality() {
-        return this.quality;
-    }
+  public int getQuality() {
+    return this.quality;
+  }
 
-    public void setType(String type) {
-        this.type = type;
-    }
+  public void setType(String type) {
+    this.type = type;
+  }
 
-    public void setQuality(int quality) {
-        this.quality = quality;
-    }
+  public void setQuality(int quality) {
+    this.quality = quality;
+  }
 }
