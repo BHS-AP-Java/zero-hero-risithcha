@@ -99,12 +99,13 @@ public class Cake {
   }
   */
 
-  void draw(String name, String age) {
+  public void draw(String name, String age) {
     String title = "Happy Birthday, " + name + "! You are " + age + " years old!";
     int artWidth = Math.max(width + 6, title.length());
 
     // Print title
     System.out.println(title);
+    System.out.println("This is a " + flavor + " cake with " + frosting + " frosting.");
 
     // Candles and flames across the cake top
     String candlesLine = "";
