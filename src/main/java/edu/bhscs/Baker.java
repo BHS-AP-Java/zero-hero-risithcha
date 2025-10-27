@@ -21,12 +21,22 @@ public class Baker {
   String name;
 
   // CONSTRUCTOR
+  /*
   Baker(Player p) {
     this.p = p;
     this.name = p.getString("Enter baker name: ");
     this.f = new Flour(); // Give baker some default flour
     this.cash = 0;
     System.out.println("Baker " + this.name + " is ready to work!");
+  }
+    */
+
+  Baker(String name) {
+      this.p = null;
+      this.name = name;
+      this.f = new Flour(); // Give baker some default flour
+      this.cash = 0;
+      System.out.println("Baker " + this.name + " is ready to work!");
   }
 
   // METHODS
@@ -39,6 +49,10 @@ public class Baker {
     // String answer = this.p.giveAnswer("what cake do you you want?");
     // return new Cake(answer, this.f);
     return null;
+  }
+
+  Cake bakes(int size, String recipientName) {
+      return new Cake("Birthday Cake", "Buttercream", size, 10, 1);
   }
 
   void takeJob(Store bakery) {

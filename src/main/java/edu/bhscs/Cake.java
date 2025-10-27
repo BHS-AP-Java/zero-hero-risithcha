@@ -154,4 +154,60 @@ public class Cake {
     base += "|";
     System.out.println(base);
   }
+
+  public void draw(Table table) {
+    String title = "Cake on a " + table.toString();
+    int artWidth = Math.max(width + 6, title.length());
+
+    // Print title
+    System.out.println(title);
+    System.out.println("This is a " + flavor + " cake with " + frosting + " frosting.");
+
+    // Candles and flames across the cake top
+    String candlesLine = "";
+    String flamesLine = "";
+    for (int i = 0; i < artWidth - 4; i++) {
+        candlesLine += 'i';
+        flamesLine += '^';
+    }
+    System.out.println(candlesLine);
+    System.out.println(flamesLine);
+
+    // Frosting top (underscores)
+    String top = "  ";
+    for (int i = 0; i < artWidth - 4; i++) top += '_';
+    System.out.println(top);
+
+    // Frosting wavy line
+    String wave = "/";
+    for (int i = 0; i < artWidth - 3; i++) {
+        wave += (i % 2 == 0) ? '~' : ' ';
+    }
+    wave += '\\';
+    System.out.println(wave);
+
+    // Layers
+    for (int layer = 0; layer < layers; layer++) {
+        String line = "|";
+        for (int i = 0; i < artWidth - 2; i++) {
+            line += (i % 3 == 0) ? '=' : '-';
+        }
+        line += "|";
+        System.out.println(line);
+    }
+
+    // Cake body (height)
+    for (int h = 0; h < height; h++) {
+        String body = "|";
+        for (int i = 0; i < artWidth - 2; i++) body += ' ';
+        body += "|";
+        System.out.println(body);
+    }
+
+    // Base
+    String base = "|";
+    for (int i = 0; i < artWidth - 2; i++) base += '_';
+    base += "|";
+    System.out.println(base);
+}
 }

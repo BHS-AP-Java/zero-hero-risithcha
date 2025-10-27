@@ -38,6 +38,8 @@ public class Main {
     // Constructor
     player = new Player();
 
+    date10_27();
+
     String name = player.getString("What is your name?");
     int age = player.getInt("How old are you?");
 
@@ -80,6 +82,13 @@ public class Main {
     player.close();
   }
 
+  public static void date10_27() {
+      Baker bob = new Baker("Bob");
+      Table t = new Table(3, 15);
+      Cake bDay = bob.bakes(5, "Suzzie");
+      bDay.draw(t);
+  }
+
   private static void displayMainMenu() {
     System.out.println();
     System.out.println("=== MAIN MENU ===");
@@ -93,7 +102,7 @@ public class Main {
 
   private static void playAsBaker() {
     if (currentBaker == null) {
-      currentBaker = new Baker(player);
+      //currentBaker = new Baker(player);
     }
 
     boolean bakerMode = true;
