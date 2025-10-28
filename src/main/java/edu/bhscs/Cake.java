@@ -209,5 +209,8 @@ public class Cake {
     for (int i = 0; i < artWidth - 2; i++) base += '_';
     base += "|";
     System.out.println(base);
-}
+    // Draw the table beneath the cake
+    System.out.println(); // Just here for testing...
+    table.draw();
+  }
 }
