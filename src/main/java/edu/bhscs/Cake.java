@@ -167,8 +167,8 @@ public class Cake {
     String candlesLine = "";
     String flamesLine = "";
     for (int i = 0; i < artWidth - 4; i++) {
-        candlesLine += 'i';
-        flamesLine += '^';
+      candlesLine += 'i';
+      flamesLine += '^';
     }
     System.out.println(candlesLine);
     System.out.println(flamesLine);
@@ -181,27 +181,27 @@ public class Cake {
     // Frosting wavy line
     String wave = "/";
     for (int i = 0; i < artWidth - 3; i++) {
-        wave += (i % 2 == 0) ? '~' : ' ';
+      wave += (i % 2 == 0) ? '~' : ' ';
     }
     wave += '\\';
     System.out.println(wave);
 
     // Layers
     for (int layer = 0; layer < layers; layer++) {
-        String line = "|";
-        for (int i = 0; i < artWidth - 2; i++) {
-            line += (i % 3 == 0) ? '=' : '-';
-        }
-        line += "|";
-        System.out.println(line);
+      String line = "|";
+      for (int i = 0; i < artWidth - 2; i++) {
+        line += (i % 3 == 0) ? '=' : '-';
+      }
+      line += "|";
+      System.out.println(line);
     }
 
     // Cake body (height)
     for (int h = 0; h < height; h++) {
-        String body = "|";
-        for (int i = 0; i < artWidth - 2; i++) body += ' ';
-        body += "|";
-        System.out.println(body);
+      String body = "|";
+      for (int i = 0; i < artWidth - 2; i++) body += ' ';
+      body += "|";
+      System.out.println(body);
     }
 
     // Base

@@ -287,5 +287,9 @@ public class Main {
     System.out.println();
     System.out.println("--- PTSA Info ---");
     schoolPTSA.showPTSAStatus();
+    String alignment = "center";
+    if (alignment.equals("center")) {
+        System.out.println("hmmmmmmmmm");
+    }
   }
 }
