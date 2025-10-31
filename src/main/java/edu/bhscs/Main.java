@@ -83,10 +83,10 @@ public class Main {
   }
 
   public static void date10_27() {
-      Baker bob = new Baker("Bob");
-      Table t = new Table(3, 15);
-      Cake bDay = bob.bakes(5, "Suzzie");
-      bDay.draw(t);
+    Baker bob = new Baker("Bob");
+    Table t = new Table(3, 15);
+    Cake bDay = bob.bakes(5, "Suzzie");
+    bDay.draw(t);
   }
 
   private static void displayMainMenu() {
@@ -102,7 +102,7 @@ public class Main {
 
   private static void playAsBaker() {
     if (currentBaker == null) {
-      //currentBaker = new Baker(player);
+      // currentBaker = new Baker(player);
     }
 
     boolean bakerMode = true;
@@ -289,7 +289,7 @@ public class Main {
     schoolPTSA.showPTSAStatus();
     String alignment = "center";
     if (alignment.equals("center")) {
-        System.out.println("hmmmmmmmmm");
+      System.out.println("hmmmmmmmmm");
     }
   }
 }

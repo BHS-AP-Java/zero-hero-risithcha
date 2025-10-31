@@ -32,11 +32,11 @@ public class Baker {
     */
 
   Baker(String name) {
-      this.p = null;
-      this.name = name;
-      this.f = new Flour(); // Give baker some default flour
-      this.cash = 0;
-      System.out.println("Baker " + this.name + " is ready to work!");
+    this.p = null;
+    this.name = name;
+    this.f = new Flour(); // Give baker some default flour
+    this.cash = 0;
+    System.out.println("Baker " + this.name + " is ready to work!");
   }
 
   // METHODS
@@ -52,7 +52,7 @@ public class Baker {
   }
 
   Cake bakes(int size, String recipientName) {
-      return new Cake("Birthday Cake", "Buttercream", size, 10, 1);
+    return new Cake("Birthday Cake", "Buttercream", size, 10, 1);
   }
 
   void takeJob(Store bakery) {

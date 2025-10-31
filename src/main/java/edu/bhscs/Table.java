@@ -83,10 +83,9 @@ public class Table {
       int remainingSpace = width - totalLegSpace; // Chars left over for spaces between legs
       int gaps = legs - 1; // Fencepost Problem! Number of gaps is one less than posts
       int spaceBetweenLegs = remainingSpace / gaps; // Base number of spaces per gap
-      int extraSpace =
-          remainingSpace
-              % gaps; // Leftover spaces from division (the remainder)              // Draw the legs
-      // with calculated spacing
+      int extraSpace = remainingSpace % gaps; // Leftover spaces from division (the remainder)
+
+      // Draw the legs
       for (int legNum = 0; legNum < legs; legNum++) {
         // Draw the leg
         System.out.print(legString);
@@ -98,6 +97,63 @@ public class Table {
             spacesToAdd++; // Distribute extra space evenly to first few gaps
           }
           // Print the spaces between this leg and the next
+          for (int s = 0; s < spacesToAdd; s++) {
+            System.out.print(" ");
+          }
+        }
+      }
+      System.out.println();
+    }
+  }
+
+  /** Draws the table with offset for centering beneath cakes */
+  public void draw(int offset) {
+    // Draw the table top with offset
+    for (int i = 0; i < offset; i++) {
+      System.out.print(" ");
+    }
+    for (int i = 0; i < width; i++) {
+      int charIndex = i % topString.length();
+      System.out.print(topString.substring(charIndex, charIndex + 1));
+    }
+    System.out.println();
+
+    // Draw the legs with offset
+    if (legs == 1) {
+      int legPosition = width / 2;
+      for (int i = 0; i < offset; i++) {
+        System.out.print(" ");
+      }
+      for (int i = 0; i < width; i++) {
+        if (i == legPosition) {
+          System.out.print(legString);
+        } else {
+          System.out.print(" ");
+        }
+      }
+      System.out.println();
+    } else if (legs > 1) {
+      // Add offset
+      for (int i = 0; i < offset; i++) {
+        System.out.print(" ");
+      }
+
+      // Calculate spaces between legs
+      int totalLegSpace = legs * legString.length();
+      int remainingSpace = width - totalLegSpace;
+      int gaps = legs - 1;
+      int spaceBetweenLegs = remainingSpace / gaps;
+      int extraSpace = remainingSpace % gaps;
+
+      // Draw the legs
+      for (int legNum = 0; legNum < legs; legNum++) {
+        System.out.print(legString);
+
+        if (legNum < legs - 1) {
+          int spacesToAdd = spaceBetweenLegs;
+          if (legNum < extraSpace) {
+            spacesToAdd++;
+          }
           for (int s = 0; s < spacesToAdd; s++) {
             System.out.print(" ");
           }
