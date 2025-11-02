@@ -163,119 +163,76 @@ public class Cake {
   }
 
   public void draw(Table table) {
+    // Build cake lines, apply centering offset
     String title = "Cake on a " + table.toString();
     int artWidth = Math.max(width + 6, title.length());
-
-    // Calculate offset for centering
-    int offset = (this.getWidth() - table.getWidth()) / 2;
-
-    // Figure out which one needs to be offset
+    // Compute difference (table width - cake art width)
+    int diff = table.getWidth() - artWidth;
     int cakeOffset = 0;
     int tableOffset = 0;
-
-    if (offset < 0) {
-      /* do the right thing when myTable is bigger */
-      cakeOffset = -offset;
+    if (diff >= 0) {
+      // table wider, shift cake right
+      cakeOffset = diff / 2;
     } else {
-      /* do the right thing when the cake is bigger */
-      tableOffset = offset;
+      // cake wider, shift table right
+      tableOffset = (-diff) / 2;
     }
 
-    // Print title with offset
-    for (int i = 0; i < cakeOffset; i++) {
-      System.out.print(" ");
-    }
+    // Title and flavor
+    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
     System.out.println(title);
-    for (int i = 0; i < cakeOffset; i++) {
-      System.out.print(" ");
-    }
+    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
     System.out.println("This is a " + flavor + " cake with " + frosting + " frosting.");
 
-    // Candles and flames across the cake top with offset
-    for (int i = 0; i < cakeOffset; i++) {
-      System.out.print(" ");
-    }
-    for (int i = 0; i < artWidth - 4; i++) {
-      System.out.print('i');
-    }
+    // Candles and flames
+    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
+    for (int i = 0; i < artWidth - 4; i++) System.out.print('i');
     System.out.println();
 
-    for (int i = 0; i < cakeOffset; i++) {
-      System.out.print(" ");
-    }
-    for (int i = 0; i < artWidth - 4; i++) {
-      System.out.print('^');
-    }
+    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
+    for (int i = 0; i < artWidth - 4; i++) System.out.print('^');
     System.out.println();
 
-    // Frosting top (underscores) with offset
-    for (int i = 0; i < cakeOffset; i++) {
-      System.out.print(" ");
-    }
+    // Frosting top
+    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
     System.out.print("  ");
-    for (int i = 0; i < artWidth - 4; i++) {
-      System.out.print('_');
-    }
+    for (int i = 0; i < artWidth - 4; i++) System.out.print('_');
     System.out.println();
 
-    // Frosting wavy line with offset
-    for (int i = 0; i < cakeOffset; i++) {
-      System.out.print(" ");
-    }
-    System.out.print("/");
+    // Frosting wavy line
+    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
+    System.out.print('/');
     for (int i = 0; i < artWidth - 3; i++) {
-      if (i % 2 == 0) {
-        System.out.print('~');
-      } else {
-        System.out.print(' ');
-      }
+      if (i % 2 == 0) System.out.print('~'); else System.out.print(' ');
     }
     System.out.println("\\");
 
-    // Layers with offset
+    // Layers
     for (int layer = 0; layer < layers; layer++) {
-      for (int i = 0; i < cakeOffset; i++) {
-        System.out.print(" ");
-      }
-      System.out.print("|");
+      for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
+      System.out.print('|');
       for (int i = 0; i < artWidth - 2; i++) {
-        if (i % 3 == 0) {
-          System.out.print('=');
-        } else {
-          System.out.print('-');
-        }
+        if (i % 3 == 0) System.out.print('='); else System.out.print('-');
       }
-      System.out.println("|");
+      System.out.println('|');
     }
 
-    // Cake body (height) with offset
+    // Cake body
     for (int h = 0; h < height; h++) {
-      for (int i = 0; i < cakeOffset; i++) {
-        System.out.print(" ");
-      }
-      System.out.print("|");
-      for (int i = 0; i < artWidth - 2; i++) {
-        System.out.print(' ');
-      }
-      System.out.println("|");
+      for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
+      System.out.print('|');
+      for (int i = 0; i < artWidth - 2; i++) System.out.print(' ');
+      System.out.println('|');
     }
 
-    // Base with offset
-    for (int i = 0; i < cakeOffset; i++) {
-      System.out.print(" ");
-    }
-    System.out.print("|");
-    for (int i = 0; i < artWidth - 2; i++) {
-      System.out.print('_');
-    }
-    System.out.println("|");
+    // Base
+    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
+    System.out.print('|');
+    for (int i = 0; i < artWidth - 2; i++) System.out.print('_');
+    System.out.println('|');
 
     // Draw the table beneath the cake
     System.out.println();
-    if (tableOffset > 0) {
-      table.draw(tableOffset);
-    } else {
-      table.draw();
-    }
+    if (tableOffset > 0) table.draw(tableOffset); else table.draw();
   }
 }
