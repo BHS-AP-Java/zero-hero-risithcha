@@ -17,12 +17,15 @@ public class Table {
   private int width;
   private String legString;
   private String topString;
+  private int legHeight;
 
   public Table(int legs, int width) {
     this.legs = legs;
     this.width = width;
     this.legString = "|";
     this.topString = "_";
+    // set the leg height proportional to width
+    this.legHeight = Math.max(1, width / 4);
   }
 
   public int getLegs() {
@@ -39,6 +42,14 @@ public class Table {
 
   public void setWidth(int width) {
     this.width = width;
+  }
+
+  public int getLegHeight() {
+    return legHeight;
+  }
+
+  public void setLegHeight(int legHeight) {
+    this.legHeight = Math.max(1, legHeight);
   }
 
   public void setLegs(String leg) {
@@ -77,6 +88,16 @@ public class Table {
         }
       }
       System.out.println();
+
+      // Repeat the leg row to make table taller
+      int legHeight = this.legHeight;
+      for (int h = 1; h < legHeight; h++) {
+        for (int i = 0; i < width; i++) {
+          if (i == legPosition) System.out.print(legString);
+          else System.out.print(" ");
+        }
+        System.out.println();
+      }
     } else if (legs > 1) {
       // Calculate spaces between legs
       int totalLegSpace = legs * legString.length(); // Total chars taken up by all legs
@@ -85,7 +106,7 @@ public class Table {
       int spaceBetweenLegs = remainingSpace / gaps; // Base number of spaces per gap
       int extraSpace = remainingSpace % gaps; // Leftover spaces from division (the remainder)
 
-      // Draw the legs
+      // Draw the legs (top row)
       for (int legNum = 0; legNum < legs; legNum++) {
         // Draw the leg
         System.out.print(legString);
@@ -103,6 +124,20 @@ public class Table {
         }
       }
       System.out.println();
+
+      // Repeat the leg row to make legs taller
+      int legHeight = this.legHeight;
+      for (int h = 1; h < legHeight; h++) {
+        for (int legNum = 0; legNum < legs; legNum++) {
+          System.out.print(legString);
+          if (legNum < legs - 1) {
+            int spacesToAdd = spaceBetweenLegs;
+            if (legNum < extraSpace) spacesToAdd++;
+            for (int s = 0; s < spacesToAdd; s++) System.out.print(" ");
+          }
+        }
+        System.out.println();
+      }
     }
   }
 
@@ -132,6 +167,17 @@ public class Table {
         }
       }
       System.out.println();
+
+      // Repeat the leg row to make legs taller
+      int legHeight = this.legHeight;
+      for (int h = 1; h < legHeight; h++) {
+        for (int i = 0; i < offset; i++) System.out.print(" ");
+        for (int i = 0; i < width; i++) {
+          if (i == legPosition) System.out.print(legString);
+          else System.out.print(" ");
+        }
+        System.out.println();
+      }
     } else if (legs > 1) {
       // Add offset
       for (int i = 0; i < offset; i++) {
@@ -145,7 +191,7 @@ public class Table {
       int spaceBetweenLegs = remainingSpace / gaps;
       int extraSpace = remainingSpace % gaps;
 
-      // Draw the legs
+      // Draw the legs (top row)
       for (int legNum = 0; legNum < legs; legNum++) {
         System.out.print(legString);
 
@@ -160,6 +206,21 @@ public class Table {
         }
       }
       System.out.println();
+
+      // Repeat the leg row to make legs taller
+      int legHeight = this.legHeight;
+      for (int h = 1; h < legHeight; h++) {
+        for (int i = 0; i < offset; i++) System.out.print(" ");
+        for (int legNum = 0; legNum < legs; legNum++) {
+          System.out.print(legString);
+          if (legNum < legs - 1) {
+            int spacesToAdd = spaceBetweenLegs;
+            if (legNum < extraSpace) spacesToAdd++;
+            for (int s = 0; s < spacesToAdd; s++) System.out.print(" ");
+          }
+        }
+        System.out.println();
+      }
     }
   }
 

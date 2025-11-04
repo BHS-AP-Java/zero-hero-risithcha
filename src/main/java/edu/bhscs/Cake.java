@@ -166,6 +166,12 @@ public class Cake {
     // Build cake lines, apply centering offset
     String title = "Cake on a " + table.toString();
     int artWidth = Math.max(width + 6, title.length());
+
+    // Make table at least as wide as the cake
+    if (table.getWidth() < artWidth) {
+      table.setWidth(artWidth);
+    }
+
     // Compute difference (table width - cake art width)
     int diff = table.getWidth() - artWidth;
     int cakeOffset = 0;
@@ -203,7 +209,8 @@ public class Cake {
     for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
     System.out.print('/');
     for (int i = 0; i < artWidth - 3; i++) {
-      if (i % 2 == 0) System.out.print('~'); else System.out.print(' ');
+      if (i % 2 == 0) System.out.print('~');
+      else System.out.print(' ');
     }
     System.out.println("\\");
 
@@ -212,7 +219,8 @@ public class Cake {
       for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
       System.out.print('|');
       for (int i = 0; i < artWidth - 2; i++) {
-        if (i % 3 == 0) System.out.print('='); else System.out.print('-');
+        if (i % 3 == 0) System.out.print('=');
+        else System.out.print('-');
       }
       System.out.println('|');
     }
@@ -232,7 +240,7 @@ public class Cake {
     System.out.println('|');
 
     // Draw the table beneath the cake
-    System.out.println();
-    if (tableOffset > 0) table.draw(tableOffset); else table.draw();
+    if (tableOffset > 0) table.draw(tableOffset);
+    else table.draw();
   }
 }
