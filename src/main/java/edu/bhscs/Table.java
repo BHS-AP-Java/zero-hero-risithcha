@@ -5,7 +5,7 @@
 
 /*
  * DESCRIPTION: Table with adjustable legs and width that can display beneath cakes
- * INPUT: Number of legs and table width
+ * INPUT: Leg height and table width
  * OUTPUT: ASCII art table with evenly spaced legs
  * EDGE CASE: Single leg table (can't use fencepost formula), legs wider than table width
  */
@@ -19,13 +19,12 @@ public class Table {
   private String topString;
   private int legHeight;
 
-  public Table(int legs, int width) {
-    this.legs = legs;
+  public Table(int legHeight, int width) {
+    this.legs = 2; // Always 2 legs
     this.width = width;
     this.legString = "|";
     this.topString = "_";
-    // set the leg height proportional to width
-    this.legHeight = Math.max(1, width / 4);
+    this.legHeight = Math.max(1, legHeight);
   }
 
   public int getLegs() {
