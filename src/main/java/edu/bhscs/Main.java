@@ -85,6 +85,9 @@ public class Main {
   public static void date10_27() {
     Baker bob = new Baker("Bob");
     Table t = new Table(3, 15);
+    t.setLeg("|?|");
+    // if the table is 15 pixels wide, now the space between is 0 if I have 5 legs.
+
     Cake bDay = bob.bakes(5, "Suzzie");
     bDay.draw(t);
   }

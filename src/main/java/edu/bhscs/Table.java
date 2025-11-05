@@ -48,10 +48,10 @@ public class Table {
   }
 
   public void setLegHeight(int legHeight) {
-    this.legHeight = Math.max(1, legHeight);
+    this.legHeight = legHeight;
   }
 
-  public void setLegs(String leg) {
+  public void setLeg(String leg) {
     this.legString = leg;
   }
 
