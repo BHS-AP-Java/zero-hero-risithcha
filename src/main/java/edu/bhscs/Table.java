@@ -24,7 +24,7 @@ public class Table {
     this.width = width;
     this.legString = "|";
     this.topString = "_";
-    this.legHeight = Math.max(1, legHeight);
+    this.legHeight = legHeight;
   }
 
   public int getLegs() {
