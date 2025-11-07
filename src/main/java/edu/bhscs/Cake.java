@@ -1,246 +1,186 @@
 // Risith Kankanamge
 // P2
 // Zero-Hero
-// 10/01/2025
+// 11/07/2025
 
 /*
- * DESCRIPTION: Delicious cake that can be baked, customized, and eaten bite by bite
- * INPUT: Flavor and ingredients
- * OUTPUT: Cake creation and eating messages
- * EDGE CASE: Trying to eat cake that's already finished
+ * DESCRIPTION: Cake that dynamically adjusts to table size.
+ * INPUT: Flavor, frosting, height, width, count, and recipient name.
+ * OUTPUT: ASCII art of cakes centered on a table.
+ * EDGE CASE: Cake with invalid dimensions.
  */
 
 package edu.bhscs;
 
 public class Cake {
-  // fields / properties
   String flavor;
   String frosting;
-  int totalBites;
-  int bitesEaten;
   int height;
   int width;
-  int layers;
+  int count;
+  String recipientName;
 
-  // Constructor
-  public Cake(String flavor, String frosting, int height, int width, int layers) {
-    System.out.println("baking a " + flavor + " cake with " + frosting + " frosting");
+  public Cake(
+      String flavor, String frosting, int height, int width, int count, String recipientName) {
     this.flavor = flavor;
     this.frosting = frosting;
     this.height = height;
     this.width = width;
-    this.layers = layers;
-    this.totalBites = height * layers;
-    this.bitesEaten = 0;
+    this.count = count;
+    this.recipientName = recipientName;
+  }
+
+  public Cake(String flavor, String frosting, int height, int width) {
+    this(flavor, frosting, height, width, 1, "");
   }
 
   public Cake() {
-    this("Vanilla", "Chocolate", 3, 10, 1);
+    this("Vanilla", "Chocolate", 3, 10, 1, "");
   }
 
   public int getWidth() {
-    // Calculate actual display width
-    String title = "This is a " + flavor + " cake with " + frosting + " frosting.";
-    int artWidth = Math.max(width + 6, title.length());
-    return artWidth;
+    String message = "HAPPY BDAY";
+    int minCakeWidth = message.length() + 2;
+    // Use a dynamic width that can adjust to table size
+    int cakeInnerWidth = Math.max(width, minCakeWidth);
+    // Actual printed width is inner width + 4 (2 for padding + 2 for borders)
+    return cakeInnerWidth + 4;
   }
 
-  /*
-  void draw() {
-      String title = "baking a " + flavor + " cake with " + frosting + " frosting";
-      int artWidth = Math.max(width + 6, title.length());
-
-      // Print title
-      System.out.println(title);
-
-      // Candles and flames across the cake top
-      String candlesLine = "";
-      String flamesLine = "";
-      for (int i = 0; i < artWidth - 4; i++) {
-          candlesLine += 'i';
-          flamesLine += '^';
-      }
-      System.out.println(candlesLine);
-      System.out.println(flamesLine);
-
-      // Frosting top (underscores)
-      String top = "  ";
-      for (int i = 0; i < artWidth - 4; i++) top += '_';
-      System.out.println(top);
-
-      // Frosting wavy line
-      String wave = "/";
-      for (int i = 0; i < artWidth - 3; i++) {
-          wave += (i % 2 == 0) ? '~' : ' ';
-      }
-      wave += '\\';
-      System.out.println(wave);
-
-      // Layers
-      for (int layer = 0; layer < layers; layer++) {
-          String line = "|";
-          for (int i = 0; i < artWidth - 2; i++) {
-              line += (i % 3 == 0) ? '=' : '-';
-          }
-          line += "|";
-          System.out.println(line);
-      }
-
-      // Cake body (height)
-      for (int h = 0; h < height; h++) {
-          String body = "|";
-          for (int i = 0; i < artWidth - 2; i++) body += ' ';
-          body += "|";
-          System.out.println(body);
-      }
-
-      // Base
-      String base = " ";
-      for (int i = 0; i < artWidth - 2; i++) base += '-';
-      System.out.println(base);
-
-      // Info
-      System.out.println();
-      System.out.println("Flavor: " + flavor + " | Frosting: " + frosting + " | Layers: " + layers);
-      System.out.println("Bites left: " + (totalBites - bitesEaten) + "/" + totalBites);
+  public void adjustToTable(Table table) {
+    // Dynamically adjust cake width to fit table nicely
+    int tableWidth = table.getWidth();
+    // Make cake slightly smaller than table for aesthetics
+    this.width = Math.max(10, tableWidth - 4);
   }
-  */
 
-  public void draw(String name, String age) {
-    String title = "Happy Birthday, " + name + "! You are " + age + " years old!";
-    int artWidth = Math.max(width + 6, title.length());
+  public void draw(int offset) {
+    // Draw logic refactored!
+    drawWithOffset(offset);
+  }
 
-    // Print title
-    System.out.println(title);
-    System.out.println("This is a " + flavor + " cake with " + frosting + " frosting.");
+  public void drawWithOffset(int offset) {
+    // Use cake fields for dynamic sizing
+    String message = "HAPPY BDAY";
+    int minCakeWidth = message.length() + 2;
+    int cakeInnerWidth = Math.max(width, minCakeWidth);
 
-    // Candles and flames across the cake top
-    String candlesLine = "";
-    String flamesLine = "";
-    for (int i = 0; i < artWidth - 4; i++) {
-      candlesLine += 'i';
-      flamesLine += '^';
+    // Candle logic
+    int maxCandles = Math.max(3, Math.min(cakeInnerWidth / 2, 10));
+    int candleCount = maxCandles;
+    int candleSpacing = Math.max(1, (cakeInnerWidth - candleCount) / (candleCount + 1));
+    int candleGroupWidth = candleCount + candleSpacing * (candleCount - 1);
+    int candleLeftPadding = (cakeInnerWidth + 4 - candleGroupWidth) / 2;
+
+    // Line 1: Candle flames
+    for (int i = 0; i < offset + candleLeftPadding; i++) System.out.print(" ");
+    for (int i = 0; i < candleCount; i++) {
+      System.out.print("'");
+      if (i < candleCount - 1) for (int j = 0; j < candleSpacing; j++) System.out.print(" ");
     }
-    System.out.println(candlesLine);
-    System.out.println(flamesLine);
+    System.out.println();
 
-    // Frosting top (underscores)
-    String top = "  ";
-    for (int i = 0; i < artWidth - 4; i++) top += '_';
-    System.out.println(top);
-
-    // Frosting wavy line
-    String wave = "/";
-    for (int i = 0; i < artWidth - 3; i++) {
-      wave += (i % 2 == 0) ? '~' : ' ';
+    // Line 2: Candle bodies
+    for (int i = 0; i < offset + candleLeftPadding; i++) System.out.print(" ");
+    for (int i = 0; i < candleCount; i++) {
+      System.out.print("|");
+      if (i < candleCount - 1) for (int j = 0; j < candleSpacing; j++) System.out.print(" ");
     }
-    wave += '\\';
-    System.out.println(wave);
+    System.out.println();
 
-    // Layers
-    for (int layer = 0; layer < layers; layer++) {
-      String line = "|";
-      for (int i = 0; i < artWidth - 2; i++) {
-        line += (i % 3 == 0) ? '=' : '-';
-      }
-      line += "|";
-      System.out.println(line);
-    }
+    // Line 3: Cake top border
+    for (int i = 0; i < offset; i++) System.out.print(" ");
+    System.out.print("+");
+    for (int i = 0; i < cakeInnerWidth + 2; i++) System.out.print("-");
+    System.out.print("+");
+    System.out.println();
 
     // Cake body (height)
-    for (int h = 0; h < height; h++) {
-      String body = "|";
-      for (int i = 0; i < artWidth - 2; i++) body += ' ';
-      body += "|";
-      System.out.println(body);
+    for (int line = 0; line < height; line++) {
+      for (int i = 0; i < offset; i++) System.out.print(" ");
+      System.out.print("|");
+      for (int i = 0; i < cakeInnerWidth + 2; i++) {
+        if (line == height / 2 && i == 1) {
+          int totalSpaces = cakeInnerWidth - message.length();
+          int messageLeftSpaces = totalSpaces / 2;
+          int messageRightSpaces = totalSpaces - messageLeftSpaces;
+          for (int j = 0; j < messageLeftSpaces; j++) System.out.print(" ");
+          System.out.print(message);
+          for (int j = 0; j < messageRightSpaces; j++) System.out.print(" ");
+          i += messageLeftSpaces + message.length() + messageRightSpaces - 1;
+        } else {
+          System.out.print(" ");
+        }
+      }
+      System.out.print("|");
+      System.out.println();
     }
 
-    // Base
-    String base = "|";
-    for (int i = 0; i < artWidth - 2; i++) base += '_';
-    base += "|";
-    System.out.println(base);
+    // Cake base
+    for (int i = 0; i < offset; i++) System.out.print(" ");
+    System.out.print("+");
+    for (int i = 0; i < cakeInnerWidth + 2; i++) System.out.print("-");
+    System.out.print("+");
+    System.out.println();
   }
 
   public void draw(Table table) {
-    // Build cake lines, apply centering offset
-    String title = "Cake on a " + table.toString();
-    int artWidth = Math.max(width + 6, title.length());
-
-    // Make table at least as wide as the cake
-    if (table.getWidth() < artWidth) {
-      table.setWidth(artWidth);
+    // Print title if recipient name exists
+    if (recipientName != null && !recipientName.isEmpty()) {
+      String title = "Cakes for " + recipientName;
+      System.out.println(title);
+      System.out.println();
     }
 
-    // Compute difference (table width - cake art width)
-    int diff = table.getWidth() - artWidth;
+    // Draw multiple cakes
+    for (int i = 0; i < count; i++) {
+      // MATH CHUNK
+      int[] offsets = calculateOffsets(table);
+      int cakeOffset = offsets[0];
+      int tableOffset = offsets[1];
+
+      // DRAW CHUNK
+      drawCake(cakeOffset);
+      drawTable(table, tableOffset);
+
+      // Add spacing between cakes if not the last one
+      if (i < count - 1) {
+        System.out.println();
+      }
+    }
+  }
+
+  // Helper method MATH CHUNK
+  private int[] calculateOffsets(Table myTable) {
+    // Dynamically adjust cake to table before calculating
+    adjustToTable(myTable);
+
+    int cakeWidth = this.getWidth();
+    int tableWidth = myTable.getWidth();
+    int offset = (cakeWidth - tableWidth) / 2;
     int cakeOffset = 0;
     int tableOffset = 0;
-    if (diff >= 0) {
-      // table wider, shift cake right
-      cakeOffset = diff / 2;
+
+    if (offset < 0) {
+      // Table is bigger - offset the cake
+      cakeOffset = Math.abs(offset);
+      tableOffset = 0;
     } else {
-      // cake wider, shift table right
-      tableOffset = (-diff) / 2;
+      // Cake is bigger - offset the table
+      cakeOffset = 0;
+      tableOffset = Math.abs(offset);
     }
 
-    // Title and flavor
-    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-    System.out.println(title);
-    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-    System.out.println("This is a " + flavor + " cake with " + frosting + " frosting.");
+    return new int[] {cakeOffset, tableOffset};
+  }
 
-    // Candles and flames
-    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-    for (int i = 0; i < artWidth - 4; i++) System.out.print('i');
-    System.out.println();
+  // Helper method: Draw cake with offset
+  private void drawCake(int offset) {
+    drawWithOffset(offset);
+  }
 
-    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-    for (int i = 0; i < artWidth - 4; i++) System.out.print('^');
-    System.out.println();
-
-    // Frosting top
-    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-    System.out.print("  ");
-    for (int i = 0; i < artWidth - 4; i++) System.out.print('_');
-    System.out.println();
-
-    // Frosting wavy line
-    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-    System.out.print('/');
-    for (int i = 0; i < artWidth - 3; i++) {
-      if (i % 2 == 0) System.out.print('~');
-      else System.out.print(' ');
-    }
-    System.out.println("\\");
-
-    // Layers
-    for (int layer = 0; layer < layers; layer++) {
-      for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-      System.out.print('|');
-      for (int i = 0; i < artWidth - 2; i++) {
-        if (i % 3 == 0) System.out.print('=');
-        else System.out.print('-');
-      }
-      System.out.println('|');
-    }
-
-    // Cake body
-    for (int h = 0; h < height; h++) {
-      for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-      System.out.print('|');
-      for (int i = 0; i < artWidth - 2; i++) System.out.print(' ');
-      System.out.println('|');
-    }
-
-    // Base
-    for (int i = 0; i < cakeOffset; i++) System.out.print(' ');
-    System.out.print('|');
-    for (int i = 0; i < artWidth - 2; i++) System.out.print('_');
-    System.out.println('|');
-
-    // Draw the table beneath the cake
-    if (tableOffset > 0) table.draw(tableOffset);
-    else table.draw();
+  // Helper method: Draw table with offset
+  private void drawTable(Table table, int offset) {
+    table.draw(offset);
   }
 }
