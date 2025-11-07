@@ -13,13 +13,16 @@
 package edu.bhscs;
 
 public class Cup implements Offsetable {
+  // Fields / Properties
   private int width;
   private String label;
 
+  // Constructor
   public Cup(String label) {
     this.label = label;
   }
 
+  // Methods
   public int getWidth() {
     return width;
   }

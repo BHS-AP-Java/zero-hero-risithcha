@@ -22,8 +22,8 @@ public class Main {
     Table t = new Table(3, 15);
     Cake bDay = bob.bakes(5, "Suzzie");
     bDay.draw(t);
-    System.out.println();
-    Cup cup = new Cup("JAVA");
-    cup.draw(t);
+    //System.out.println();
+    //Cup cup = new Cup("JAVA");
+    //cup.draw(t);
   }
 }

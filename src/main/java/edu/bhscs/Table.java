@@ -13,17 +13,20 @@
 package edu.bhscs;
 
 public class Table implements Offsetable {
+  // Fields / Properties
   private int height;
   private int width;
   private int legs = 2;
   private String legString = "|";
   private String topString = "-";
 
+  // Constructor
   public Table(int height, int width) {
     this.height = height;
     this.width = width;
   }
 
+  // Methods
   public int getWidth() {
     return width;
   }

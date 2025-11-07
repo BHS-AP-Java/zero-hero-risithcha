@@ -13,6 +13,7 @@
 package edu.bhscs;
 
 public class Cake implements Offsetable {
+  // Fields / Properties
   String flavor;
   String frosting;
   int height;
@@ -20,6 +21,7 @@ public class Cake implements Offsetable {
   int count;
   String recipientName;
 
+  // Constructor
   public Cake(String flavor, String frosting, int height, int width, int count, String recipientName) {
     this.flavor = flavor;
     this.frosting = frosting;
@@ -29,6 +31,7 @@ public class Cake implements Offsetable {
     this.recipientName = recipientName;
   }
 
+  // Methods
   public int getWidth() {
     String message = "HAPPY BDAY";
     int minCakeWidth = message.length() + 2;
