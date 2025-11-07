@@ -2,8 +2,9 @@
 // P2
 // Zero-Hero
 // 11/07/2025
+
 /*
- * DESCRIPTION: Table that supports dynamic width and customizable legs/top.
+ * DESCRIPTION: Table that supports dynamic width and customizable legs/top. Used for centering cakes and cups.
  * INPUT: Height, width, leg style, and top style.
  * OUTPUT: ASCII art of a table with legs at both ends.
  * EDGE CASE: Table with invalid dimensions.
@@ -11,7 +12,7 @@
 
 package edu.bhscs;
 
-public class Table {
+public class Table implements Offsetable {
   private int height;
   private int width;
   private int legs = 2;
@@ -20,10 +21,6 @@ public class Table {
 
   public Table(int height, int width) {
     this.height = height;
-    this.width = width;
-  }
-
-  public void setWidth(int width) {
     this.width = width;
   }
 
@@ -45,7 +42,9 @@ public class Table {
 
   public void draw(int offset) {
     // Top border (fencepost: top at both ends)
-    for (int i = 0; i < offset; i++) System.out.print(" ");
+    for (int i = 0; i < offset; i++) {
+      System.out.print(" ");
+    }
     for (int i = 0; i < width; i++) {
       int charIndex = i % topString.length();
       System.out.print(topString.substring(charIndex, charIndex + 1));
@@ -54,7 +53,9 @@ public class Table {
 
     // Legs (fencepost: legs at both ends)
     for (int h = 0; h < height; h++) {
-      for (int i = 0; i < offset; i++) System.out.print(" ");
+      for (int i = 0; i < offset; i++) {
+        System.out.print(" ");
+      }
       for (int i = 0; i < width; i++) {
         // Evenly spaced legs
         boolean isLeg = false;
@@ -71,5 +72,11 @@ public class Table {
       }
       System.out.println();
     }
+  }
+
+  @Override
+  public void draw(Offsetable below) {
+    int offset = getOffset(below);
+    draw(offset);
   }
 }
