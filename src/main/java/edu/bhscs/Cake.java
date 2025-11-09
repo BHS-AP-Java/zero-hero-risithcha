@@ -22,7 +22,8 @@ public class Cake implements Offsetable {
   String recipientName;
 
   // Constructor
-  public Cake(String flavor, String frosting, int height, int width, int count, String recipientName) {
+  public Cake(
+      String flavor, String frosting, int height, int width, int count, String recipientName) {
     this.flavor = flavor;
     this.frosting = frosting;
     this.height = height;
@@ -33,7 +34,12 @@ public class Cake implements Offsetable {
 
   // Methods
   public int getWidth() {
-    String message = "HAPPY BDAY";
+    String message;
+    if (recipientName != null && !recipientName.isEmpty()) {
+      message = recipientName;
+    } else {
+      message = "HAPPY BDAY";
+    }
     int minCakeWidth = message.length() + 2;
     int cakeInnerWidth = Math.max(width, minCakeWidth);
     return cakeInnerWidth + 4;
@@ -49,7 +55,12 @@ public class Cake implements Offsetable {
   }
 
   public void drawWithOffset(int offset) {
-    String message = "HAPPY BDAY";
+    String message;
+    if (recipientName != null && !recipientName.isEmpty()) {
+      message = recipientName;
+    } else {
+      message = "HAPPY BDAY";
+    }
     int minCakeWidth = message.length() + 2;
     int cakeInnerWidth = Math.max(width, minCakeWidth);
 

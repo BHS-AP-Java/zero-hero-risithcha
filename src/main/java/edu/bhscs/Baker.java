@@ -26,5 +26,4 @@ public class Baker {
   Cake bakes(int count, String recipientName) {
     return new Cake("Vanilla", "Chocolate", 3, 10, count, recipientName);
   }
-
 }
